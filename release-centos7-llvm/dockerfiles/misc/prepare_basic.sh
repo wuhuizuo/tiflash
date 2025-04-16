@@ -20,7 +20,9 @@ function prepare_basic() {
     yum install -y epel-release centos-release-scl && \
     sed -i s/mirror.centos.org/vault.centos.org/g /etc/yum.repos.d/*.repo && \
     sed -i s/^#.*baseurl=http/baseurl=http/g /etc/yum.repos.d/*.repo && \
-    sed -i s/^mirrorlist=http/#mirrorlist=http/g /etc/yum.repos.d/*.repo
+    sed -i s/^mirrorlist=http/#mirrorlist=http/g /etc/yum.repos.d/*.repo && \
+    ([ "$(arch)" = "x86_64" ] || sed -i 's#vault.centos.org/centos/#vault.centos.org/altarch/#g' /etc/yum.repos.d/*.repo)
+
     yum install -y \
          devscripts \
          fakeroot \
@@ -32,6 +34,6 @@ function prepare_basic() {
          bzip2 \
          chrpath
     yum install -y curl git perl wget cmake3 glibc-static zlib-devel diffutils ninja-build devtoolset-10
-    yum install -y 'perl(Data::Dumper)' 
+    yum install -y 'perl(Data::Dumper)'
     yum clean all -y
 }
