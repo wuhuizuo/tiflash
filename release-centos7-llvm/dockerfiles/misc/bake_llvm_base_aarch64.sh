@@ -55,7 +55,7 @@ function bake_llvm_base_aarch64() {
 
     # Rust
     source $SCRIPTPATH/install_rust.sh
-    install_rust 
+    install_rust nightly-2023-12-28
     source $HOME/.cargo/env
 
     # ccache
